@@ -41,6 +41,7 @@ fallbackContract.withdraw();
 ```
 
 Here are the logs from the exploit contract:
+
 ![alt text](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/main/img/Fallback.png?raw=true)
 
 ## Recommendations
