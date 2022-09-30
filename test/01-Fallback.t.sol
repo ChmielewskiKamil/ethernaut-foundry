@@ -65,7 +65,7 @@ contract FallbackTest is Test {
     //////////////////////////////////////////////////////////////*/
 
     /**
-     * @author I've found this useful function
+     * I've found this useful function
      * in github/twpony Ethernaut repo
      * @notice This functions lets us create labels (names) for addresses
      * which will improve readability in traces
