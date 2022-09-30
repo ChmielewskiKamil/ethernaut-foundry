@@ -15,7 +15,7 @@ contract FallbackTest is Test {
 
     Ethernaut ethernaut;
 
-    /// @notice eve is the attacker
+    /// @dev eve is the attacker
     address eve = makeNameForAddress("eve");
 
     function setUp() public {
@@ -53,7 +53,9 @@ contract FallbackTest is Test {
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
 
-        bool challengeCompleted = ethernaut.submitLevelInstance(payable(levelAddress));
+        bool challengeCompleted = ethernaut.submitLevelInstance(
+            payable(levelAddress)
+        );
         vm.stopPrank();
         assert(challengeCompleted);
     }
@@ -71,7 +73,9 @@ contract FallbackTest is Test {
      * an address for that person
      */
     function makeNameForAddress(string memory name) public returns (address) {
-        address addr = address(uint160(uint256(keccak256(abi.encodePacked(name)))));
+        address addr = address(
+            uint160(uint256(keccak256(abi.encodePacked(name))))
+        );
         vm.label(addr, name);
         return addr;
     }
