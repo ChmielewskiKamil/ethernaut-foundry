@@ -24,7 +24,7 @@ If Eve sends ether directly to the contract via external call, Eve can become th
 3. Eve can withdraw all the funds.
 
 ## Proof of Concept - hypothesis test ✅
-Here is a simplified version of the unit test exploiting the vulnerability (complete version here: https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/main/test/01-Fallback.t.sol)
+Here is a simplified version of the unit test exploiting the vulnerability ([complete version here](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/main/test/01-Fallback.t.sol))
 
 ```solidity
 // eve calls `contribute()` function
