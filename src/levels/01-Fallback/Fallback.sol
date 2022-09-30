@@ -5,7 +5,8 @@ import "openzeppelin-contracts/math/SafeMath.sol";
 
 contract Fallback {
     using SafeMath for uint256;
-    mapping(address => uint) public contributions;
+
+    mapping(address => uint256) public contributions;
     address payable public owner;
 
     constructor() public {
@@ -26,7 +27,7 @@ contract Fallback {
         }
     }
 
-    function getContribution() public view returns (uint) {
+    function getContribution() public view returns (uint256) {
         return contributions[msg.sender];
     }
 
