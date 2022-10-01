@@ -1,5 +1,3 @@
-Saturday, 1st October 2022 01:19
-
 # Level 2 - Fallout
 
 ## Objectives
