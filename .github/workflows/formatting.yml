@@ -1,4 +1,4 @@
-name: format code
+name: Run code formatting
 
 on:
   push:
