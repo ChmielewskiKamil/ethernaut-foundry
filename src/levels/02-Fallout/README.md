@@ -64,7 +64,7 @@ then withdraw all the allocations. This way she will drain the contract balance.
 2. As the owner of the contract Eve can call `collectAllocations()` function and
    withdraw the contract balance.
 
-## Proof of Concept - hypothesis test ✅ ❌
+## Proof of Concept - hypothesis test ✅
 
 Here is a simplified version of the unit test exploiting the vulnerability
 ([Full version here](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/main/test/02-Fallout.t.sol))
