@@ -22,6 +22,7 @@ contract CoinFlip {
         }
 
         lastHash = blockValue;
+        // @audit-issue weak source of randomness
         uint256 coinFlip = blockValue.div(FACTOR);
         bool side = coinFlip == 1 ? true : false;
 
