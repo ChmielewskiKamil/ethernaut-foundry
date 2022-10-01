@@ -8,8 +8,8 @@ contract Fallout {
     mapping(address => uint) allocations;
     address payable public owner;
 
+    // @audit-issue typo in the constructor name
     /**
-     * @audit-issue typo in the constructor name
      * because of that Fallout contract has no constructor
      * Fal1out function can be called by anyone
      */
