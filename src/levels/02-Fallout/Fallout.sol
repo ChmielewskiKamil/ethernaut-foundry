@@ -25,6 +25,7 @@ contract Fallout {
     }
 
     // @audit weird syntax mapping.add?
+    // @audit-ok it is from safe math
     // @audit no event emitted on critical function
     function allocate() public payable {
         allocations[msg.sender] = allocations[msg.sender].add(msg.value);
