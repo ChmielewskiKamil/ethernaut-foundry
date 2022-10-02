@@ -48,7 +48,7 @@ coinFlip() {
 	echo ${blockhash}
 	FACTOR=57896044618658097711785492504343953926634992332820282019728792003956564819968
 
-	# calculate block value the same way as flip() function
+	# calculate block value the same way as a flip() function
 	blockValue=$(cast --to-base --base-in hex ${blockhash} dec)
 	echo ${blockValue}
 
@@ -79,9 +79,9 @@ will get a completely different decimal value!
 
 ![Example conversion using online hex to dec converter](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/coin-flip-level3/img/CoinFlip-hex-to-decimal-converter.png?raw=true)
 
-Clearly, this is not our number. It turns out that `cast --to-base` function has
-some problems with numbers raised to the power of `77` that are close to the
-`max_uin256` value. If you want to read more detailed explanation of this
+This is not our number. It turns out that the `cast --to-base` function has some
+problems with numbers raised to the power of `77` that are close to the
+`max_uin256` value. If you want to read a more detailed explanation of this
 problem, please refer to the issue that I've submitted to the Foundry repo
 [here](https://github.com/foundry-rs/foundry/issues/3432).
 
