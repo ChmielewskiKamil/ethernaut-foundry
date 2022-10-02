@@ -61,9 +61,9 @@ coinFlip
 ```
 
 This is where things started getting weird. My script always returned values
-smaller than `1`. This would mean that they would be rounded to `0` in the
-`flip()` function and you would never win. This is the sample output from the
-program:
+smaller than `1`. This would mean that the outcome would be rounded to `0` in
+the `flip()` function and you would never win. This is the sample output from
+the program:
 
 ![Incorrect output from the CoinFlip.sh](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/coin-flip-level3/img/CoinFlipScript-incorrect-output.png?raw=true)
 
