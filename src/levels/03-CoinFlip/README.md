@@ -88,6 +88,7 @@ problem, please refer to the issue that I've submitted to the Foundry repo
 If we hardcode the proper values into the script, we get the following result.
 
 ![Correct output fron the FlipCoin script using hardcoded values](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/coin-flip-level3/img/CoinFlipScript-hardcoded-values-proper-result.png?raw=true)
+
 `1.754` will be rounded to `1` and everything will work fine.
 
 If you have any thoughts about this issue please contact me on
