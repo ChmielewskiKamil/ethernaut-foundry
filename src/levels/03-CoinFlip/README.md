@@ -65,7 +65,7 @@ smaller than `1`. This would mean that the outcome would be rounded to `0` in
 the `flip()` function and you would never win. This is the sample output from
 the program:
 
-![Incorrect output from the CoinFlip.sh](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/coin-flip-level3/img/CoinFlipScript-incorrect-output.png?raw=true)
+![Incorrect output from the CoinFlip.sh](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/main/img/CoinFlipScript-incorrect-output.png?raw=true)
 
 - The first line is the hash of the previous block
 - The second line is the calculated `blockValue`
@@ -77,7 +77,7 @@ online hex-to-decimal converter
 [this one](https://www.rapidtables.com/convert/number/hex-to-decimal.html), you
 will get a completely different decimal value!
 
-![Example conversion using online hex to dec converter](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/coin-flip-level3/img/CoinFlip-hex-to-decimal-converter.png?raw=true)
+![Example conversion using online hex to dec converter](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/main/img/CoinFlip-hex-to-decimal-converter.png?raw=true)
 
 This is not our number. It turns out that the `cast --to-base` function has some
 problems with numbers raised to the power of `77` that are close to the
@@ -87,7 +87,7 @@ problem, please refer to the issue that I've submitted to the Foundry repo
 
 If we hardcode the proper values into the script, we get the following result.
 
-![Correct output fron the FlipCoin script using hardcoded values](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/coin-flip-level3/img/CoinFlipScript-hardcoded-values-proper-result.png?raw=true)
+![Correct output fron the FlipCoin script using hardcoded values](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/main/img/CoinFlipScript-hardcoded-values-proper-result.png?raw=true)
 
 `1.754` will be rounded to `1` and everything will work fine.
 
@@ -158,7 +158,7 @@ for (uint blockNumber = 1; blockNumber <= 10; blockNumber++) {
 
 Here are the logs from the exploit:
 
-![Image of the logs of the CoinFlip exploit](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/coin-flip-level3/img/CoinFlipExploit-logs.png?raw=true)
+![Image of the logs of the CoinFlip exploit](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/main/img/CoinFlipExploit-logs.png?raw=true)
 
 ## Recommendations
 
