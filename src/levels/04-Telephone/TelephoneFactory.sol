@@ -2,7 +2,7 @@
 
 pragma solidity ^0.6.0;
 
-import "./base/Level.sol";
+import "src/core/Level.sol";
 import "./Telephone.sol";
 
 contract TelephoneFactory is Level {
