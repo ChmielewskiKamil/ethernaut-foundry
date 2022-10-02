@@ -132,6 +132,57 @@ block and score 10 consecutive wins easily.
      parameter of the `flip()` function.
 4. Eve will repeat the attack in 10 consecutive blocks.
 
-## Proof of Concept - hypothesis test ✅ ❌
+## Proof of Concept - hypothesis test ✅
+
+Here is a simplified version of the unit test exploiting the vulnerability Full
+version here ()
+
+```solidity
+/*
+* we are going to simulate Eve calling the `attack` function
+* 10 times via for loop
+* @param blockNumber is the number of the current block
+* Eve would be waiting for the next block to call the `attack`
+* blockNumber gets incremented
+* Eve repeats the attack
+*
+* we are using vm.roll() to create the next block
+*/
+for (uint blockNumber = 1; blockNumber <= 10; blockNumber++) {
+	vm.roll(blockNumber);
+
+	coinFlipExploit.coinFlipAttack();
+);
+```
+
+Here are the logs from the exploit:
+
+![Image of the logs of the CoinFlip exploit](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/coin-flip-level3/img/CoinFlipExploit-logs.png?raw=true)
 
 ## Recommendations
+
+- `CoinFlip` contract can be easily exploited by abusing the Weak PRNG. This can
+  be used both by the miners and the potential malicious users.
+  - The use of Chainlink VRF or RANDAO is recommended for generating randomness.
+- The `flip()` function does not check if the caller is a contract. Such a check
+  would prevent attacks like the one presented in the Proof of Concept. An
+  example of such validation would be wrapping the logic of the `flip()`
+  function in the `if / else` statement like the one shown below:
+
+```solidity
+function flip(bool _guess) public returns (bool) {
+	if (msg.sender == tx.origin) {
+		/*
+		* LOGIC HERE
+		*/
+	}
+	else {
+		revert("Caller cannot be a contract!");
+	}
+}
+```
+
+- This however would not solve the problem completely. The attacker could still
+  calculate the outcome of the game externally and call the `flip()` function
+  manually or automate the whole process via a `bash` script similar to the one
+  shown before.
