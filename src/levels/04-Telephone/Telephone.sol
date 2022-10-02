@@ -9,6 +9,8 @@ contract Telephone {
     }
 
     function changeOwner(address _owner) public {
+        // @audit opposite of checking if the caller is an EOA
+        // tx.origin == msg.sender
         if (tx.origin != msg.sender) {
             owner = _owner;
         }
