@@ -14,6 +14,7 @@ contract CoinFlip {
         consecutiveWins = 0;
     }
 
+    // @audit no check if the caller is a contract
     function flip(bool _guess) public returns (bool) {
         uint256 blockValue = uint256(blockhash(block.number.sub(1)));
 
