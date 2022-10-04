@@ -9,7 +9,7 @@ coinFlip() {
 
     # this is a hardcoded value to prove the point 
     # check out readme for details
-    blockhash=0xe0983ed68afd2bbaa2af9d58a1a1510aad6443d7eda671c5f880dbb1b92baa91
+    # blockhash=0xe0983ed68afd2bbaa2af9d58a1a1510aad6443d7eda671c5f880dbb1b92baa91
     echo ${blockhash}
 
     # calculate block value the same way as flip() function
