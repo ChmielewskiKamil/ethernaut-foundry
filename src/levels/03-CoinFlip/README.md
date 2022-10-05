@@ -94,6 +94,11 @@ If we hardcode the proper values into the script, we get the following result.
 If you have any thoughts about this issue please contact me on
 [Twitter](https://twitter.com/kamilchmielu). I would love to hear from you.
 
+### UPDATE 05.10.2022
+
+As of today my issue is resolved. The script will return proper result. Wrong
+conversion has been fixed in yesterdays nightly release of Foundry.
+
 Answering my previous question: what if the `blockValue` would be double the
 `FACTOR`? It turns out that the factor is big enough that the `blockValue` would
 have to be bigger than the `max_uint256` value. So it is not possible.
