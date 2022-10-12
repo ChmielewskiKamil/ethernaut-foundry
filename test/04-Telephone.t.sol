@@ -40,22 +40,28 @@ contract TelephoneTest is Test {
         vm.startPrank(eve);
 
         address levelAddress = ethernaut.createLevelInstance(telephoneFactory);
-        Telephone telephoneContract = Telephone(payable(levelAddress));
+        Telephone telephoneContract = Telephone(levelAddress);
         telephoneExploit = new TelephoneExploit(levelAddress);
 
         emit log_named_address(
-            "Address of the exploit contract: ",
-            address(this)
+            "Contract owner address: ",
+            address(telephoneContract.owner())
         );
         emit log_named_address("Eve's address: ", address(eve));
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL EXPLOIT
         //////////////////////////////////////////////////////////////*/
+        emit log_string("Eve calls the attack function... 🧨");
 
-        /**
-         * CODE GOES HERE
-         */
+        telephoneExploit.attack(eve);
+
+        emit log_string("Ownership changed...");
+
+        emit log_named_address(
+            "New contract owner: ",
+            address(telephoneContract.owner())
+        );
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
