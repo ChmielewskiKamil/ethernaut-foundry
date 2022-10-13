@@ -141,7 +141,7 @@ block and score 10 consecutive wins easily.
 ## Proof of Concept - hypothesis test ✅
 
 Here is a simplified version of the unit test exploiting the vulnerability Full
-version here ()
+version ([here](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/main/src/levels/03-CoinFlip/CoinFlipExploit.sol))
 
 ```solidity
 /*
