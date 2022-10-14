@@ -11,6 +11,8 @@ contract Token {
 
     // @audit transfer does not revert -->
     // boolean value needs to be taken care of on the caller's end
+
+    // @audit no 0 address check (address _to)
     function transfer(address _to, uint _value) public returns (bool) {
         // @audit-issue left side of the expression might underflow?
         // it means it will be greater than zero and pass the check
