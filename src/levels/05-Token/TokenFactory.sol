@@ -6,6 +6,7 @@ import "src/core/Level.sol";
 import "./Token.sol";
 
 contract TokenFactory is Level {
+    // @audit add underscores to improve readability -> 21_000_000
     uint supply = 21000000;
     uint playerSupply = 20;
 
