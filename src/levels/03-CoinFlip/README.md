@@ -96,8 +96,8 @@ If you have any thoughts about this issue please contact me on
 
 ### UPDATE 05.10.2022
 
-As of today my issue is resolved. The script will return proper result. Wrong
-conversion has been fixed in yesterdays nightly release of Foundry.
+As of today, my issue is resolved. The script will return the proper result.
+Wrong conversion has been fixed in yesterday's nightly release of Foundry.
 
 Answering my previous question: what if the `blockValue` would be double the
 `FACTOR`? It turns out that the factor is big enough that the `blockValue` would
@@ -141,7 +141,8 @@ block and score 10 consecutive wins easily.
 ## Proof of Concept - hypothesis test ✅
 
 Here is a simplified version of the unit test exploiting the vulnerability Full
-version here ()
+version
+([here](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/main/src/levels/03-CoinFlip/CoinFlipExploit.sol))
 
 ```solidity
 /*
