@@ -2,7 +2,7 @@
 pragma solidity ^0.6.0;
 
 contract Token {
-    mapping(address => uint) balances;
+    mapping(address => uint) public balances;
     uint public totalSupply;
 
     constructor(uint _initialSupply) public {
