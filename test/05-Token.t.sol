@@ -23,6 +23,10 @@ contract TokenTest is Test {
         ethernaut = new Ethernaut();
     }
 
+    /*//////////////////////////////////////////////////////////////
+                EXAMPLE UNIT TEST TO MITIGATE THE ISSUE 
+    //////////////////////////////////////////////////////////////*/
+
     function test_fuzz_transferShouldProperlyUpdateBalances(uint256 value)
         public
     {
