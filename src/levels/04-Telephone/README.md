@@ -1,5 +1,8 @@
 # Level 4 - Telephone
 
+You can also read this
+[on my blog](https://wizzardhat.com/ethernaut-level-4-telephone/) 😎
+
 ## Objectives
 
 - claim ownership of the contract
