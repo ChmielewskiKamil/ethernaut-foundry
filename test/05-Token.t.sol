@@ -29,6 +29,7 @@ contract TokenTest is Test {
 
     /**
      * @dev fuzz test below is commented out to make GitHub actions pass
+     *
      * it ilustrates the vulnerability present in the Token contract
      */
 
