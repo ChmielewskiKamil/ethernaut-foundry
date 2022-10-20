@@ -13,6 +13,10 @@ You will find each writeup in the distinct folder located under
 the `test` directory under the same name convention as the folders above
 `XX-LevelName.t.sol`.
 
+You will also find the write-ups
+[on my blog](https://wizzardhat.com/complete-series/). In some cases, they are
+much more detailed than those on GitHub 🧐
+
 ## Acknowledgements
 
 - The structure of my reports is based on the wonderful insights provided by

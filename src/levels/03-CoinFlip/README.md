@@ -1,5 +1,8 @@
 # Level 3 - CoinFlip
 
+You can also read this
+[on my blog](https://wizzardhat.com/ethernaut-level-3-coinflip/) 😎
+
 ## Objectives
 
 - guess the correct outcome of the game 10 times in a row

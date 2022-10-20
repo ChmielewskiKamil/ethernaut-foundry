@@ -1,5 +1,8 @@
 # Ethernaut Level 5 - Token
 
+You can also read this
+[on my blog](https://wizzardhat.com/ethernaut-level-5-token/) 😎
+
 ## Objectives
 
 - You are given 20 tokens. Use them to gain additional tokens.

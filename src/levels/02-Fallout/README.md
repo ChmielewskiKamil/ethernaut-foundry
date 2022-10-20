@@ -1,5 +1,8 @@
 # Level 2 - Fallout
 
+You can also read this
+[on my blog](https://wizzardhat.com/ethernaut-level-2-fallout/) 😎
+
 ## Objectives
 
 - claim ownership of the contract
