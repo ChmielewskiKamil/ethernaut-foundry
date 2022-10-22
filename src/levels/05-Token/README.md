@@ -249,5 +249,5 @@ declared as `constant`.
 
 - Building Better Systems Podcast - Episode #6: Dan Guido -
   [What the hell are blockchain people doing & why isn't it a dumpster fire?](https://youtu.be/wT-AmR7wtI8)
-- [Building secure contracts](https://github.com/crytic/building-secure-contracts)-
+- [Building secure contracts](https://github.com/crytic/building-secure-contracts) -
   Trail of Bits - Slither, Echidna, Manticore tutorials
