@@ -64,7 +64,7 @@ deployment.
 There are many possible solutions. I will experiment with them and present one
 below.
 
-## Proof of Concept - hypothesis test ✅ ❌
+## Proof of Concept - hypothesis test ✅
 
 The hypothesis has been proven to be true. The balance of the `Force` contract
 can be increased with `selfdestruct`.
