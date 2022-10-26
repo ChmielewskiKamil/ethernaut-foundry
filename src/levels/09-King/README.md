@@ -2,4 +2,4 @@
 
 ## Objectives
 
-- Break the game! Don't allow the level reclaim kingship of the instance.
+- Break the game! Don't allow the level to reclaim the kingship of the instance.
