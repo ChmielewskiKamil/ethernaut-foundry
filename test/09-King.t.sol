@@ -37,9 +37,12 @@ contract KingTest is Test {
 
         ethernaut.registerLevel(kingFactory);
         vm.startPrank(eve);
-
-        address levelAddress = ethernaut.createLevelInstance(kingFactory);
+        vm.deal(eve, 1 ether);
+        address levelAddress = ethernaut.createLevelInstance{value: 1 ether}(
+            kingFactory
+        );
         King kingContract = King(payable(levelAddress));
+        emit log_named_address("Original king: ", kingContract._king());
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL EXPLOIT
