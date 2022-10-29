@@ -15,5 +15,7 @@ contract KingAttack {
         require(success, "King call failed");
     }
 
-    receive() external payable {}
+    receive() external payable {
+        revert();
+    }
 }
