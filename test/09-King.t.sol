@@ -48,7 +48,9 @@ contract KingTest is Test {
                                 LEVEL EXPLOIT
         //////////////////////////////////////////////////////////////*/
 
+        emit log_string("Deploying the attack contract...");
         KingAttack kingAttack = new KingAttack(address(kingContract));
+        emit log_string("Sending ether to claim kingship...");
         kingAttack.attack{value: 1 ether}();
         emit log_named_address("New king: ", kingContract._king());
 
