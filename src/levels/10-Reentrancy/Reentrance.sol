@@ -12,6 +12,8 @@ contract Reentrance {
     using SafeMath for uint256;
     mapping(address => uint) public balances;
 
+    //@audit - no 0 address check
+    //@audit-issue - funds may be lost when addr is not provided
     function donate(address _to) public payable {
         //@audit-ok - SafeMath is being used
         // potential overflow - not an issue
