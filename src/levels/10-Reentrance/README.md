@@ -108,7 +108,8 @@ balance underflowed and it is a very big number.
 Right now I have no idea why this is happening. Let's explore further...
 
 If we increase the verbosity of the test we see a little bit more:
-![[10-increased-verbosity.png]]
+
+![Test with increased verbosity](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/main/img/10-increased-verbosity.png?raw=true)
 
 The `Reentrance` contract has `0.002` ether inside. As you can see the
 `withdraw` function is called 3 times. 2 times it succeeds and the 3rd time is
@@ -204,7 +205,8 @@ worst case ~29k units of gas.
 However, if the amount of Ether in the contract increases the cost of such an
 attack is absurdly high. Let's give the contract 1 ether.
 
-Running it with 1 ether overflows the stack :( ![[10-stack-overflow.png]]
+Running it with 1 ether overflows the stack :(
+![Stack overflow](https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/main/img/10-stack-overflow.png?raw=true)
 
 We have to increase the attack amount as well (donation has to be higher to
 withdraw more).
