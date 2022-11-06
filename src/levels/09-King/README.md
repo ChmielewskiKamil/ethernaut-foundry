@@ -154,7 +154,7 @@ unplayable.
 
 ## Recommendations
 
-- Apply the checks-effects-interactions pattern. Making interactions before the
+- Apply the check-effects-interactions pattern. Making interactions before the
   state changes introduce an opening for the reentrancy attack.
 
 ## References
