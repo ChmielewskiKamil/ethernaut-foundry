@@ -44,8 +44,11 @@ contract ElevatorTest is Test {
         /*//////////////////////////////////////////////////////////////
                                 LEVEL EXPLOIT
         //////////////////////////////////////////////////////////////*/
-
+        ElevatorAttack elevatorAttack = new ElevatorAttack(
+            address(elevatorContract)
+        );
         emit log_string("Starting the exploit... 🧨");
+        elevatorAttack.goToTopFloor();
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
