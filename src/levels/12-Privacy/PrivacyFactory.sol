@@ -2,7 +2,7 @@
 
 pragma solidity ^0.6.0;
 
-import "./base/Level.sol";
+import "src/core/Level.sol";
 import "./Privacy.sol";
 
 contract PrivacyFactory is Level {
