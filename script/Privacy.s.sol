@@ -14,6 +14,8 @@ import "src/levels/12-Privacy/Privacy.sol";
 import "src/levels/12-Privacy/PrivacyFactory.sol";
 
 contract Deployment is Script, Test {
+    // to run the script use:
+    // forge script script/Privacy.s.sol:Deployment --fork-url http://localhost:8545 --broadcast
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("ANVIL_PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
@@ -28,6 +30,8 @@ contract Deployment is Script, Test {
         address levelAddress = ethernaut.createLevelInstance(privacyFactory);
         Privacy privacyContract = Privacy(levelAddress);
 
+        // Level address will appear in the logs section
+        // after running the script
         emit log_named_address("Level address: ", levelAddress);
 
         vm.stopBroadcast();
