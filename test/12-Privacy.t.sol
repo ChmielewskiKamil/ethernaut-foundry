@@ -58,6 +58,8 @@ contract PrivacyTest is Test {
 
         bytes16 downcastedThirdElement = bytes16(thirdElement);
 
+        emit log_named_bytes32("Downcasted data: ", downcastedThirdElement);
+
         emit log_string(
             "Eve calls the unlock function with the aquired data... 🔑"
         );
