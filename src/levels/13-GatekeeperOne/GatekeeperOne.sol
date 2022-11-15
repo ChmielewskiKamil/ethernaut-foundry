@@ -17,6 +17,7 @@ contract GatekeeperOne {
     // it means that the gasleft() will return the amount of gas
     // that was passed in the external function call
     // probably supplying 8191 units of gas will do the trick
+    // or any number * 8191
     modifier gateTwo() {
         require(gasleft().mod(8191) == 0);
         _;
