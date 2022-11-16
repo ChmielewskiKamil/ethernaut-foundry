@@ -9,7 +9,7 @@ contract GatekeeperOne {
 
     // @audit call from a contract will pass the check
     modifier gateOne() {
-        require(msg.sender != tx.origin);
+        require(msg.sender != tx.origin, "Gate one fail");
         _;
     }
 
@@ -19,7 +19,7 @@ contract GatekeeperOne {
     // probably supplying 8191 units of gas will do the trick
     // or any number * 8191
     modifier gateTwo() {
-        require(gasleft().mod(8191) == 0);
+        require(gasleft().mod(8191) == 0, "Gate two fail");
         _;
     }
 
