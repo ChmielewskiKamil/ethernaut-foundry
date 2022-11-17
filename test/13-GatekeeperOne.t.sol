@@ -36,17 +36,33 @@ contract GatekeeperOneTest is Test {
         GatekeeperOneFactory gatekeeperOneFactory = new GatekeeperOneFactory();
 
         ethernaut.registerLevel(gatekeeperOneFactory);
-        vm.startPrank(eve);
-
+        vm.startPrank(tx.origin);
         address levelAddress = ethernaut.createLevelInstance(
             gatekeeperOneFactory
         );
+
         GatekeeperOne gatekeeperOneContract = GatekeeperOne(levelAddress);
 
         emit log_string("Starting the exploit... 🧨");
         emit log_named_address("Eve's address", eve);
-        uint16 eveAddrSliced = uint16(eve);
-        emit log_named_uint("Eve's address sliced", eveAddrSliced);
+        emit log_named_address("Ethernaut's address", address(ethernaut));
+        emit log_named_address(
+            "Factory's address",
+            address(gatekeeperOneFactory)
+        );
+        emit log_named_address(
+            "Instance's address",
+            address(gatekeeperOneContract)
+        );
+        // it turns out that there is a default value for tx.origin
+        // set up by Foundry
+        // 0x00a329c0648769a73afac7f9381e08fb43dbea72
+        // this is the reason why this script was not working for Eve
+        // she is not the tx.origin
+        // Test contract is
+        // startPrank sets msg.sender not tx.origin
+        // it is possible to set tx.origin tho, but its buggy as hell
+        emit log_named_address("This is tx.origin: ", tx.origin);
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL EXPLOIT
@@ -56,7 +72,10 @@ contract GatekeeperOneTest is Test {
             address(gatekeeperOneContract)
         );
 
-        gatekeeperOneAttack.attack();
+        bytes8 gateKey = bytes8(uint64(uint160(tx.origin))) &
+            0xFFFFFFFF0000FFFF;
+
+        gatekeeperOneAttack.attack(gateKey);
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
