@@ -36,6 +36,10 @@ contract GatekeeperOneTest is Test {
         GatekeeperOneFactory gatekeeperOneFactory = new GatekeeperOneFactory();
 
         ethernaut.registerLevel(gatekeeperOneFactory);
+
+        // THIS IS IMPORTANT
+        // START PRANK WITH TX.ORIGIN OR CHANGE IT IN FOUNDRY.TOML
+
         vm.startPrank(tx.origin);
         address levelAddress = ethernaut.createLevelInstance(
             gatekeeperOneFactory
