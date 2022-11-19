@@ -88,8 +88,19 @@ contract GatekeeperOneTest is Test {
             uint16(uint64(gateKeyPartOne))
         );
 
-        bytes8 gateKey = bytes8(uint64(uint160(tx.origin))) &
-            0x000000000000FFFF;
+        // GATE 3 condition 2
+        bytes8 gateKeyPartTwo = bytes8(uint64(uint160(tx.origin))) &
+            0xF00000000000FFFF;
+
+        emit log_named_uint(
+            "part two - uint32: ",
+            uint32(uint64(gateKeyPartTwo))
+        );
+        emit log_named_uint("part two - uint64: ", uint64(gateKeyPartTwo));
+
+        // The key from the second condition already solves the challenge
+        // FINAL KEY
+        bytes8 gateKey = gateKeyPartTwo;
 
         gatekeeperOneAttack.attack(gateKey);
         /*//////////////////////////////////////////////////////////////
