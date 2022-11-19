@@ -76,8 +76,20 @@ contract GatekeeperOneTest is Test {
             address(gatekeeperOneContract)
         );
 
+        // GATE 3 condition 1
+        bytes8 gateKeyPartOne = bytes8(uint64(uint160(tx.origin))) &
+            0x000000000000FFFF;
+        emit log_named_uint(
+            "part one - uint32: ",
+            uint32(uint64(gateKeyPartOne))
+        );
+        emit log_named_uint(
+            "part one - uint16: ",
+            uint16(uint64(gateKeyPartOne))
+        );
+
         bytes8 gateKey = bytes8(uint64(uint160(tx.origin))) &
-            0xFFFFFFFF0000FFFF;
+            0x000000000000FFFF;
 
         gatekeeperOneAttack.attack(gateKey);
         /*//////////////////////////////////////////////////////////////
