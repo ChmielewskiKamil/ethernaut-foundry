@@ -2,6 +2,13 @@
 
 pragma solidity ^0.8.0;
 
+/**
+ * @dev This contract uses ^0.8.0 compiler version
+ * previous imports used the 0.6.0 version of OZ contracts
+ *
+ * It was necessary to add new OpenZeppelin helpers
+ * in the utilities folder
+ */
 import "src/utilities/Level-08.sol";
 import "./GatekeeperTwo.sol";
 
