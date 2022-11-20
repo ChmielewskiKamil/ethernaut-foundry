@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.0;
 
-import "src/core/Level.sol";
+import "src/utilities/Level-08.sol";
 import "./GatekeeperTwo.sol";
 
 contract GatekeeperTwoFactory is Level {
