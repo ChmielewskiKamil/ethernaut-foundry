@@ -5,7 +5,11 @@ pragma solidity ^0.8.0;
 contract GatekeeperTwo {
     address public entrant;
 
-    // @audit-ok - this is the exact same modifier as in the previous challenge
+    /*
+     * @audit-ok - this is the exact same modifier as in the previous challenge
+     * @audit-issue - There is no revert string or custom error.
+     * It is not clear what happens when this fails.
+     */
     modifier gateOne() {
         require(msg.sender != tx.origin);
         _;
@@ -17,6 +21,8 @@ contract GatekeeperTwo {
      * does it check for tx.origin or msg.sender or smth else?
      * @todo - is the syntax x := correct?
      * what does it do?
+     * @audit-issue - same thing as in the gateOne -> it is not clear
+     * what happens when this fails, there is no revert string or custom error
      */
     modifier gateTwo() {
         uint x;
@@ -38,6 +44,7 @@ contract GatekeeperTwo {
      * Is it (uint64) ^ (uint64 == type(uint64))?
      *
      * @todo - is max(uint65) == 2^64 - 1?
+     * @audit-issue - same thing as in gates 1&2, no revert strings, errors
      */
     modifier gateThree(bytes8 _gateKey) {
         require(
