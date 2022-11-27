@@ -12,3 +12,7 @@ out/
 
 # slither
 .vscode
+
+# echidna
+crytic-export
+corpus
