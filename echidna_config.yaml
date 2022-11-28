@@ -3,4 +3,4 @@ testMode: assertion
 # You should ALWAYS set corpusDir to track coverage
 corpusDir: corpus
 
-testLimit: 3000000
+testLimit: 50000
