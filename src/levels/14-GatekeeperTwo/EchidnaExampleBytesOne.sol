@@ -54,6 +54,8 @@ contract TestEchidnaExampleBytesOne {
             );
             emit MaxType(bytes1(type(uint8).max));
             assert(echidnaExampleBytesOne.entrant() == address(0));
-        } catch (bytes memory error) {}
+        } catch (bytes memory error) {
+            assert(true);
+        }
     }
 }
