@@ -22,7 +22,7 @@ contract EchidnaExample {
 contract TestEchidnaExample is EchidnaExample {
     address echidna_caller = msg.sender;
 
-    function test_if_can_pass_the_gate(bytes8 gateKey) public {
+    function test_if_can_pass_the_gate() public view {
         assert(entrant == address(0));
     }
 }
