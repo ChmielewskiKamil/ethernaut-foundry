@@ -16,3 +16,5 @@ out/
 # echidna
 crytic-export
 corpus
+coverage
+covered.*
