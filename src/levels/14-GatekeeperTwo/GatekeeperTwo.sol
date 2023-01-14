@@ -25,7 +25,7 @@ contract GatekeeperTwo {
      * what happens when this fails, there is no revert string or custom error
      */
     modifier gateTwo() {
-        uint x;
+        uint256 x;
         // @audit - there is no type safety in assembly
         // is this safe?
         assembly {
@@ -58,8 +58,8 @@ contract GatekeeperTwo {
     // @audit-ok - this is the exact same function as in the previous challenge
     function enter(bytes8 _gateKey)
         public
-        gateOne
-        gateTwo
+        // gateOne
+        // gateTwo
         gateThree(_gateKey)
         returns (bool)
     {
