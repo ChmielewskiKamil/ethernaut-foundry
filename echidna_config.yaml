@@ -3,4 +3,7 @@ testMode: assertion
 # You should ALWAYS set corpusDir to track coverage
 corpusDir: corpus
 
-testLimit: 50000
+# testLimit: 50000
+initialize: init.json
+multi-abi: true
+
