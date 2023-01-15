@@ -1,3 +1,7 @@
+# Ganache for Etheno -> Echidna tests
+node_modules
+package-lock.json
+
 # Compiler files
 cache/
 out/
@@ -12,3 +16,9 @@ out/
 
 # slither
 .vscode
+
+# echidna
+crytic-export
+corpus
+coverage
+covered.*
