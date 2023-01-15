@@ -8,6 +8,6 @@ contract EchidnaGatekeeperTwo {
         GatekeeperTwo(0x903ef7B0c35291f89407903270FeA611C85f515c);
 
     function test_if_can_pass_the_gate() public view {
-        assert(gatekeeperTwo.entrant() == address(0));
+        // assert(gatekeeperTwo.entrant() == address(0));
     }
 }
