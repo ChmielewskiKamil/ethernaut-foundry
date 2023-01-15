@@ -45,15 +45,6 @@ contract GatekeeperTwoTest is Test {
 
         emit log_string("Starting the exploit...");
         emit log_named_address("Eve's address", eve);
-        emit log_named_address("Ethernaut's address", address(ethernaut));
-        emit log_named_address(
-            "Factory's address",
-            address(gatekeeperTwoFactory)
-        );
-        emit log_named_address(
-            "Instance's address",
-            address(gatekeeperTwoContract)
-        );
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL EXPLOIT
