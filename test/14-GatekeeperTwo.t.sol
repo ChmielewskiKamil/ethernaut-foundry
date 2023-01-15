@@ -7,6 +7,7 @@ import "forge-std/Test.sol";
 // Ethernaut game components
 import {Ethernaut} from "src/core/Ethernaut-08.sol";
 import {GatekeeperTwoFactory, GatekeeperTwo} from "src/levels/14-GatekeeperTwo/GatekeeperTwoFactory.sol";
+import {GatekeeperTwoAttack} from "src/levels/14-GatekeeperTwo/GatekeeperTwoAttack.sol";
 
 contract GatekeeperTwoTest is Test {
     /*//////////////////////////////////////////////////////////////
@@ -36,7 +37,10 @@ contract GatekeeperTwoTest is Test {
 
         ethernaut.registerLevel(gatekeeperTwoFactory);
 
-        vm.startPrank(eve);
+        /*
+        This one is important. We need to use the alternative signature of startPrank to set the tx.origin as well.
+        */
+        vm.startPrank(eve, eve);
         address levelAddress = ethernaut.createLevelInstance(
             gatekeeperTwoFactory
         );
@@ -50,10 +54,15 @@ contract GatekeeperTwoTest is Test {
                                 LEVEL EXPLOIT
         //////////////////////////////////////////////////////////////*/
 
-        /**
-         * CODE GOES HERE
-         */
+        GatekeeperTwoAttack attackContract;
+        attackContract = new GatekeeperTwoAttack(
+            address(gatekeeperTwoContract)
+        );
 
+        emit log_named_address(
+            "GatekeeperTwo entrant: ",
+            gatekeeperTwoContract.entrant()
+        );
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
