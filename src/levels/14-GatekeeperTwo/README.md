@@ -144,7 +144,7 @@ Hybrid Echidna can find the key in ~2 minutes.
 
 I've run the test with the standard Echidna, and it wasn't able to find it in 50 minutes. 
 
-![Hybrid echidna test output]((https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/main/img/14-Hybrid-echidna-test-output.png?raw=true))
+![Hybrid echidna test output]((https://github.com/ChmielewskiKamil/ethernaut-foundry/blob/main/img/14-Hybrid-echidna-test-output.png?raw))
 
 As you can see, the key contains some weird symbols: `^ CAN` and `RS`. This is due to the bug that I have found. The HEVM is opportunistically trying to decode bytes to string whenever possible. 
 
