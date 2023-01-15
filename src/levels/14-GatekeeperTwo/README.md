@@ -1,6 +1,6 @@
 # Ethernaut Level 14 - GatekeeperTwo
 
-You can also read this \[on my blog\](https://wizzardhat.com/ethernaut-level-14-gatekeepertwo/) 😎
+You can also read this [on my blog](https://wizzardhat.com/ethernaut-level-14-gatekeepertwo/) 😎
 
 ## Objectives
 
