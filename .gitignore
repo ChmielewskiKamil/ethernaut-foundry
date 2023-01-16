@@ -22,3 +22,7 @@ crytic-export
 corpus
 coverage
 covered.*
+
+# manticore
+manticore
+mcore*

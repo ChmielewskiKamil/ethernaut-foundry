@@ -20,7 +20,7 @@ contract EchidnaExample {
 }
 
 contract TestEchidnaExample is EchidnaExample {
-    function test_if_can_pass_the_gate() public view {
+    function crytic_test_if_can_pass_the_gate() public view {
         assert(entrant == address(0));
     }
 }
