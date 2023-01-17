@@ -2,8 +2,7 @@
 
 pragma solidity ^0.8.0;
 
-import './base/Level.sol';
-import './NaughtCoin.sol';
+import "src/utilities/ERC20-08.sol";
 
 contract NaughtCoinFactory is Level {
 

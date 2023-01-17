@@ -43,10 +43,7 @@ contract CoinFlipTest is Test {
         CoinFlip coinFlipContract = CoinFlip(payable(levelAddress));
         coinFlipExploit = new CoinFlipExploit(levelAddress);
 
-        emit log_named_address(
-            "Address of the exploit contract: ",
-            address(this)
-        );
+        emit log_named_address("Address of the exploit contract: ", address(this));
         emit log_named_address("Eve's address: ", address(eve));
 
         /*//////////////////////////////////////////////////////////////
@@ -66,22 +63,17 @@ contract CoinFlipTest is Test {
          *
          * we are using vm.roll() to create the next block
          */
-        for (uint blockNumber = 1; blockNumber <= 10; blockNumber++) {
+        for (uint256 blockNumber = 1; blockNumber <= 10; blockNumber++) {
             vm.roll(blockNumber);
             coinFlipExploit.coinFlipAttack();
-            emit log_named_uint(
-                "Consecutive wins: ",
-                coinFlipContract.consecutiveWins()
-            );
+            emit log_named_uint("Consecutive wins: ", coinFlipContract.consecutiveWins());
         }
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
 
-        bool challengeCompleted = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool challengeCompleted = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(challengeCompleted);
     }
@@ -99,9 +91,7 @@ contract CoinFlipTest is Test {
      * an address for that person
      */
     function makeNameForAddress(string memory name) public returns (address) {
-        address addr = address(
-            uint160(uint256(keccak256(abi.encodePacked(name))))
-        );
+        address addr = address(uint160(uint256(keccak256(abi.encodePacked(name)))));
         vm.label(addr, name);
         return addr;
     }

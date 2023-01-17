@@ -46,23 +46,14 @@ contract GatekeeperTwo {
      * @todo - is max(uint65) == 2^64 - 1?
      * @audit-issue - same thing as in gates 1&2, no revert strings, errors
      */
+
     modifier gateThree(bytes8 _gateKey) {
-        require(
-            uint64(bytes8(keccak256(abi.encodePacked(msg.sender)))) ^
-                uint64(_gateKey) ==
-                type(uint64).max
-        );
+        require(uint64(bytes8(keccak256(abi.encodePacked(msg.sender)))) ^ uint64(_gateKey) == type(uint64).max);
         _;
     }
 
     // @audit-ok - this is the exact same function as in the previous challenge
-    function enter(bytes8 _gateKey)
-        public
-        gateOne
-        gateTwo
-        gateThree(_gateKey)
-        returns (bool)
-    {
+    function enter(bytes8 _gateKey) public gateOne gateTwo gateThree(_gateKey) returns (bool) {
         entrant = tx.origin;
         return true;
     }

@@ -3,7 +3,7 @@ pragma solidity ^0.6.0;
 
 contract King {
     address payable king;
-    uint public prize;
+    uint256 public prize;
     address payable public owner;
 
     // @audit-ok

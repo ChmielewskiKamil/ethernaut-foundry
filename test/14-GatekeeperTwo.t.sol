@@ -41,9 +41,7 @@ contract GatekeeperTwoTest is Test {
         This one is important. We need to use the alternative signature of startPrank to set the tx.origin as well.
         */
         vm.startPrank(eve, eve);
-        address levelAddress = ethernaut.createLevelInstance(
-            gatekeeperTwoFactory
-        );
+        address levelAddress = ethernaut.createLevelInstance(gatekeeperTwoFactory);
 
         GatekeeperTwo gatekeeperTwoContract = GatekeeperTwo(levelAddress);
 
@@ -59,17 +57,12 @@ contract GatekeeperTwoTest is Test {
             address(gatekeeperTwoContract)
         );
 
-        emit log_named_address(
-            "GatekeeperTwo entrant: ",
-            gatekeeperTwoContract.entrant()
-        );
+        emit log_named_address("GatekeeperTwo entrant: ", gatekeeperTwoContract.entrant());
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
 
-        bool challengeCompleted = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool challengeCompleted = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(challengeCompleted);
     }
@@ -87,9 +80,7 @@ contract GatekeeperTwoTest is Test {
      * an address for that person
      */
     function makeNameForAddress(string memory name) public returns (address) {
-        address addr = address(
-            uint160(uint256(keccak256(abi.encodePacked(name))))
-        );
+        address addr = address(uint160(uint256(keccak256(abi.encodePacked(name)))));
         vm.label(addr, name);
         return addr;
     }

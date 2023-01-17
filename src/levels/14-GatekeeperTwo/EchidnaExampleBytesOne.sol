@@ -5,11 +5,7 @@ contract EchidnaExampleBytesOne {
     address public entrant;
 
     modifier gateThree(bytes1 _gateKey) {
-        require(
-            uint8(bytes1(keccak256(abi.encodePacked(msg.sender)))) ^
-                uint8(_gateKey) ==
-                type(uint8).max
-        );
+        require(uint8(bytes1(keccak256(abi.encodePacked(msg.sender)))) ^ uint8(_gateKey) == type(uint8).max);
         _;
     }
 
@@ -40,18 +36,10 @@ contract TestEchidnaExampleBytesOne {
             emit Entrant(echidnaExampleBytesOne.entrant());
             emit ContractAddress(address(this));
             emit GateKey(gateKey);
-            emit LastByteOfSender(
-                bytes1(keccak256(abi.encodePacked(msg.sender)))
-            );
-            emit KeccakOfTheContract(
-                keccak256(abi.encodePacked(address(this)))
-            );
-            emit KeccakConvertedToBytes(
-                bytes2(keccak256(abi.encodePacked(address(this))))
-            );
-            emit XorOutput(
-                bytes1(keccak256(abi.encodePacked(address(this)))) ^ gateKey
-            );
+            emit LastByteOfSender(bytes1(keccak256(abi.encodePacked(msg.sender))));
+            emit KeccakOfTheContract(keccak256(abi.encodePacked(address(this))));
+            emit KeccakConvertedToBytes(bytes2(keccak256(abi.encodePacked(address(this)))));
+            emit XorOutput(bytes1(keccak256(abi.encodePacked(address(this)))) ^ gateKey);
             emit MaxType(bytes1(type(uint8).max));
             // assert(echidnaExampleBytesOne.entrant() == address(0));
         } catch (bytes memory error) {

