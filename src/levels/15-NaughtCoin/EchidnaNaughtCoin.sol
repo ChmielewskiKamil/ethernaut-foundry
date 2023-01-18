@@ -6,9 +6,15 @@ import "src/levels/15-NaughtCoin/NaughtCoin.sol";
 contract EchidnaNaughtCoin {
     NaughtCoin token;
     address echidna_caller = msg.sender;
+    bool deployed;
 
-    constructor() {
-        token = NaughtCoin(echidna_caller);
+    event InitialSupply(uint256 supply);
+
+    function setUp() public {
+        if (!deployed) {
+            token = new NaughtCoin(echidna_caller);
+            deployed = true;
+        }
     }
 
     function assert_true() public {
@@ -16,33 +22,42 @@ contract EchidnaNaughtCoin {
     }
 
     function token_is_deployed() public {
-        assert(address(token) != address(0));
+        if (!deployed) {
+            assert(address(token) != echidna_caller);
+        }
+    }
+
+    function initial_supply_should_be_set_properly() public {
+        if (deployed) {
+            emit InitialSupply(token.INITIAL_SUPPLY());
+            assert(token.INITIAL_SUPPLY() == 1_000_000_000_000_000_000_000_000);
+        }
     }
 
     function caller_balance_should_equal_initial_supply() public {
-        // setup
-        uint256 callerBalanceInitial = token.balanceOf(echidna_caller);
-
-        // property
-        assert(callerBalanceInitial == token.balanceOf(echidna_caller));
+        if (deployed) {
+            assert(token.balanceOf(echidna_caller) == token.INITIAL_SUPPLY());
+        }
     }
 
     function token_transfer_always_revert_before_timelock(
         address to,
         uint256 amount
     ) public {
-        // pre-conditions
-        uint256 currentTime = block.timestamp;
-        if (currentTime < token.timeLock()) {
-            (bool success, ) = address(token).call(
-                abi.encodeWithSignature(
-                    "transfer(address, uint256)",
-                    to,
-                    amount
-                )
-            );
-            // property
-            assert(!success);
+        if (deployed) {
+            // pre-conditions
+            uint256 currentTime = block.timestamp;
+            if (currentTime < token.timeLock()) {
+                (bool success, ) = address(token).call(
+                    abi.encodeWithSignature(
+                        "transfer(address, uint256)",
+                        to,
+                        amount
+                    )
+                );
+                // property
+                assert(!success);
+            }
         }
     }
 }
