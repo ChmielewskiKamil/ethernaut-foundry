@@ -4,6 +4,5 @@ testMode: assertion
 corpusDir: corpus
 
 testLimit: 50000 
-# initialize: init.json
 multi-abi: true
-
+# format: text
