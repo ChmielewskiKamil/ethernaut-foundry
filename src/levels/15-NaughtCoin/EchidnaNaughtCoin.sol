@@ -66,9 +66,10 @@ contract EchidnaNaughtCoin {
         uint256 amount
     ) public {
         // pre-conditions
-        if (deployed && token.allowance(from, msg.sender) > 0) {
+        if (deployed) {
+            amount = _between(amount, 1, token.INITIAL_SUPPLY());
             // actions
-            try token.transferFrom(from, to, amount) {
+            try token.transferFrom(echidna_caller, to, amount) {
                 assert(false);
             } catch {}
             // post conditions
@@ -78,7 +79,7 @@ contract EchidnaNaughtCoin {
 
     // @audit-info Helper function to increase allowance for other properties
     function _increaseAllowance(address spender, uint256 addedAmount)
-        internal
+        public
         returns (bool)
     {
         bool success = token.increaseAllowance(spender, addedAmount);
