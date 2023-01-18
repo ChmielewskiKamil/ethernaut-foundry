@@ -9,6 +9,7 @@ contract EchidnaNaughtCoin {
     bool deployed;
 
     event InitialSupply(uint256 supply);
+    event Time(uint256 time);
 
     function setUp() public {
         if (!deployed) {
@@ -17,14 +18,9 @@ contract EchidnaNaughtCoin {
         }
     }
 
-    function assert_true() public {
-        assert(true);
-    }
-
     function token_is_deployed() public {
-        if (!deployed) {
-            assert(address(token) != echidna_caller);
-        }
+        require(deployed);
+        assert(address(token) != address(0));
     }
 
     function initial_supply_should_be_set_properly() public {
@@ -44,20 +40,27 @@ contract EchidnaNaughtCoin {
         address to,
         uint256 amount
     ) public {
-        if (deployed) {
-            // pre-conditions
-            uint256 currentTime = block.timestamp;
-            if (currentTime < token.timeLock()) {
-                (bool success, ) = address(token).call(
-                    abi.encodeWithSignature(
-                        "transfer(address, uint256)",
-                        to,
-                        amount
-                    )
-                );
-                // property
-                assert(!success);
-            }
+        // setup
+        uint256 currentTime = block.timestamp;
+        // pre-conditions
+        if (deployed && currentTime < token.timeLock()) {
+            amount = _between(amount, 1, token.INITIAL_SUPPLY());
+            // actions
+            try token.transfer(to, amount) {
+                emit Time(currentTime);
+                emit Time(token.timeLock());
+                assert(false);
+            } catch {}
+            // post-conditions
+            assert(token.balanceOf(echidna_caller) == token.INITIAL_SUPPLY());
         }
+    }
+
+    function _between(
+        uint256 amount,
+        uint256 low,
+        uint256 max
+    ) internal pure returns (uint256) {
+        return (low + (amount % (max - low + 1)));
     }
 }
