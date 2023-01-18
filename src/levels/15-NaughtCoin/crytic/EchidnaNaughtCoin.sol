@@ -66,12 +66,17 @@ contract EchidnaNaughtCoin {
         uint256 amount
     ) public {
         // pre-conditions
-        if (deployed) {
-            amount = _between(amount, 1, token.INITIAL_SUPPLY());
+        if (
+            deployed &&
+            amount > 0 &&
+            token.allowance(echidna_caller, msg.sender) > 0
+        ) {
             // actions
             try token.transferFrom(echidna_caller, to, amount) {
                 assert(false);
-            } catch {}
+            } catch {
+                assert(true);
+            }
             // post conditions
             assert(token.balanceOf(echidna_caller) == token.INITIAL_SUPPLY());
         }
@@ -83,7 +88,13 @@ contract EchidnaNaughtCoin {
         returns (bool)
     {
         bool success = token.increaseAllowance(spender, addedAmount);
-        require(success);
+        assert(success);
+    }
+
+    // @audit-info Helper function to increase allowance for other properties
+    function _approve(address spender, uint256 amount) public {
+        bool success = token.approve(spender, amount);
+        assert(success);
     }
 
     function _between(
