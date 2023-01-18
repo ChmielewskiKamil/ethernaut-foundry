@@ -11,7 +11,7 @@ contract NaughtCoin is ERC20 {
     uint256 public INITIAL_SUPPLY;
     address public player;
 
-    constructor(address _player) ERC20("NaughtCoin", "0x0") {
+    constructor(address _player) ERC20("NaughtCoin", "NTC") {
         player = _player;
         // @audit big numbers are hard to read
         // consider separating the digits with undrscores
