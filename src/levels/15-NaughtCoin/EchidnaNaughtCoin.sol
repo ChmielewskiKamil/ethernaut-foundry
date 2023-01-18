@@ -38,7 +38,7 @@ contract EchidnaNaughtCoin {
 
     // @audit-info Property: Player should not be able to transfer tokens
     // before the timelock period
-    function token_transfer_always_revert_before_timelock_period(
+    function token_transfer_always_reverts_before_timelock_period(
         address to,
         uint256 amount
     ) public {
@@ -60,10 +60,20 @@ contract EchidnaNaughtCoin {
 
     // @audit-info Property: It should not be possible to move funds from
     // the timelocked balance to a different address via transferFrom
-    function transfer_from_always_revert_before_timelock_period() public {
+    function transfer_from_always_reverts_before_timelock_period(
+        address from,
+        address to,
+        uint256 amount
+    ) public {
         // pre-conditions
-        // actions
-        // post conditions
+        if (deployed && token.allowance(from, msg.sender) > 0) {
+            // actions
+            try token.transferFrom(from, to, amount) {
+                assert(false);
+            } catch {}
+            // post conditions
+            assert(token.balanceOf(echidna_caller) == token.INITIAL_SUPPLY());
+        }
     }
 
     // @audit-info Helper function to increase allowance for other properties
