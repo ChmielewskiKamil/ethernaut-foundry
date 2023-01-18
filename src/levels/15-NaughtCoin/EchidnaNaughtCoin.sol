@@ -36,6 +36,8 @@ contract EchidnaNaughtCoin {
         }
     }
 
+    // @audit-info Property: Sender should not be able to transfer tokens
+    // before the timelock period
     function token_transfer_always_revert_before_timelock(
         address to,
         uint256 amount
