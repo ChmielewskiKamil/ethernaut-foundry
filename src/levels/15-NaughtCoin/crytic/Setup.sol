@@ -15,9 +15,12 @@ contract User {
 contract Setup {
     NaughtCoin token;
     User player;
+    User bob;
+    bool setupCompleted;
 
     constructor() public {
         player = new User();
+        bob = new User();
         token = new NaughtCoin(address(player));
     }
 
