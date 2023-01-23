@@ -1,0 +1,8 @@
+# Can set testMode to property or assertion mode depending on how you want to test the system's properties
+testMode: assertion
+# You should ALWAYS set corpusDir to track coverage
+corpusDir: corpus
+
+testLimit: 50000 
+multi-abi: true
+# format: text

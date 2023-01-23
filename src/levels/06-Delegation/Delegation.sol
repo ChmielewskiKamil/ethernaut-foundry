@@ -28,7 +28,7 @@ contract Delegation {
 
     fallback() external {
         // @audit dangerous delegatecall with data provided by the user
-        (bool result, ) = address(delegate).delegatecall(msg.data);
+        (bool result,) = address(delegate).delegatecall(msg.data);
 
         // @audit-issue return value is not checked
 

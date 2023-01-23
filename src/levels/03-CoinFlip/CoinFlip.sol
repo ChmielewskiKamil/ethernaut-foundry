@@ -5,10 +5,10 @@ import "openzeppelin-contracts/math/SafeMath.sol";
 
 contract CoinFlip {
     using SafeMath for uint256;
+
     uint256 public consecutiveWins;
     uint256 lastHash;
-    uint256 FACTOR =
-        57896044618658097711785492504343953926634992332820282019728792003956564819968;
+    uint256 FACTOR = 57896044618658097711785492504343953926634992332820282019728792003956564819968;
 
     constructor() public {
         consecutiveWins = 0;

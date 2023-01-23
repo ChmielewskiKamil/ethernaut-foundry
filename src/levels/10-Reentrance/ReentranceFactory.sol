@@ -6,14 +6,9 @@ import "src/core/Level.sol";
 import "./Reentrance.sol";
 
 contract ReentranceFactory is Level {
-    uint public insertCoin = 0.001 ether;
+    uint256 public insertCoin = 0.001 ether;
 
-    function createInstance(address _player)
-        public
-        payable
-        override
-        returns (address)
-    {
+    function createInstance(address _player) public payable override returns (address) {
         _player;
         require(msg.value >= insertCoin);
         Reentrance instance = new Reentrance();
@@ -22,11 +17,7 @@ contract ReentranceFactory is Level {
         return address(instance);
     }
 
-    function validateInstance(address payable _instance, address _player)
-        public
-        override
-        returns (bool)
-    {
+    function validateInstance(address payable _instance, address _player) public override returns (bool) {
         _player;
         Reentrance instance = Reentrance(_instance);
         return address(instance).balance == 0;

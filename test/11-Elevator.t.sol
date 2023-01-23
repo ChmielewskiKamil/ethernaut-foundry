@@ -54,9 +54,7 @@ contract ElevatorTest is Test {
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
 
-        bool challengeCompleted = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool challengeCompleted = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(challengeCompleted);
     }
@@ -74,9 +72,7 @@ contract ElevatorTest is Test {
      * an address for that person
      */
     function makeNameForAddress(string memory name) public returns (address) {
-        address addr = address(
-            uint160(uint256(keccak256(abi.encodePacked(name))))
-        );
+        address addr = address(uint160(uint256(keccak256(abi.encodePacked(name)))));
         vm.label(addr, name);
         return addr;
     }

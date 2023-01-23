@@ -11,7 +11,7 @@ contract KingAttack {
     }
 
     function attack() public payable {
-        (bool success, ) = address(king).call{value: msg.value}("");
+        (bool success,) = address(king).call{value: msg.value}("");
         require(success, "King call failed");
     }
 

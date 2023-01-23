@@ -15,11 +15,7 @@ contract PrivacyFactory is Level {
         return address(instance);
     }
 
-    function validateInstance(address payable _instance, address)
-        public
-        override
-        returns (bool)
-    {
+    function validateInstance(address payable _instance, address) public override returns (bool) {
         Privacy instance = Privacy(_instance);
         return instance.locked() == false;
     }

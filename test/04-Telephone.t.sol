@@ -43,10 +43,7 @@ contract TelephoneTest is Test {
         Telephone telephoneContract = Telephone(levelAddress);
         telephoneExploit = new TelephoneExploit(levelAddress);
 
-        emit log_named_address(
-            "Contract owner address: ",
-            address(telephoneContract.owner())
-        );
+        emit log_named_address("Contract owner address: ", address(telephoneContract.owner()));
         emit log_named_address("Eve's address: ", address(eve));
 
         /*//////////////////////////////////////////////////////////////
@@ -58,18 +55,13 @@ contract TelephoneTest is Test {
 
         emit log_string("Ownership changed...");
 
-        emit log_named_address(
-            "New contract owner: ",
-            address(telephoneContract.owner())
-        );
+        emit log_named_address("New contract owner: ", address(telephoneContract.owner()));
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
 
-        bool challengeCompleted = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool challengeCompleted = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(challengeCompleted);
     }
@@ -87,9 +79,7 @@ contract TelephoneTest is Test {
      * an address for that person
      */
     function makeNameForAddress(string memory name) public returns (address) {
-        address addr = address(
-            uint160(uint256(keccak256(abi.encodePacked(name))))
-        );
+        address addr = address(uint160(uint256(keccak256(abi.encodePacked(name)))));
         vm.label(addr, name);
         return addr;
     }

@@ -5,6 +5,7 @@ import "openzeppelin-contracts/math/SafeMath.sol";
 
 contract GatekeeperOne {
     using SafeMath for uint256;
+
     address public entrant;
 
     // @audit call from a contract will pass the check
@@ -24,14 +25,8 @@ contract GatekeeperOne {
     }
 
     modifier gateThree(bytes8 _gateKey) {
-        require(
-            uint32(uint64(_gateKey)) == uint16(uint64(_gateKey)),
-            "GatekeeperOne: invalid gateThree part one"
-        );
-        require(
-            uint32(uint64(_gateKey)) != uint64(_gateKey),
-            "GatekeeperOne: invalid gateThree part two"
-        );
+        require(uint32(uint64(_gateKey)) == uint16(uint64(_gateKey)), "GatekeeperOne: invalid gateThree part one");
+        require(uint32(uint64(_gateKey)) != uint64(_gateKey), "GatekeeperOne: invalid gateThree part two");
         require(
             // @audit I guess we need to go backwards from uint16(tx.origin)
             // from this equation we will derive the _gateKey
@@ -42,13 +37,7 @@ contract GatekeeperOne {
         _;
     }
 
-    function enter(bytes8 _gateKey)
-        public
-        gateOne
-        gateTwo
-        gateThree(_gateKey)
-        returns (bool)
-    {
+    function enter(bytes8 _gateKey) public gateOne gateTwo gateThree(_gateKey) returns (bool) {
         entrant = tx.origin;
         return true;
     }

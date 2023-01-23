@@ -48,16 +48,11 @@ contract ReentranceTest is Test {
          */
         vm.deal(eve, 0.001 ether);
 
-        address payable levelAddress = payable(
-            ethernaut.createLevelInstance{value: 0.001 ether}(reentranceFactory)
-        );
+        address payable levelAddress = payable(ethernaut.createLevelInstance{value: 0.001 ether}(reentranceFactory));
         Reentrance reentranceContract = Reentrance(levelAddress);
         // vm.deal(address(reentranceContract), 100 ether);
 
-        emit log_named_uint(
-            "Balance of the vulnerable contract (initial): ",
-            address(reentranceContract).balance
-        );
+        emit log_named_uint("Balance of the vulnerable contract (initial): ", address(reentranceContract).balance);
 
         // Eve needs funds to donate to the contract
         vm.deal(eve, 1 ether);
@@ -82,27 +77,22 @@ contract ReentranceTest is Test {
         emit log_named_uint(
             "Attack contract's balance in the contract after donation: ",
             reentranceContract.balanceOf(address(reentranceAttack))
-        );
+            );
 
         reentranceAttack.attack(0.01 ether);
 
         emit log_named_uint(
             "Attack contract balance in the contract after withdrawal: ",
             reentranceContract.balanceOf(address(reentranceAttack))
-        );
+            );
 
-        emit log_named_uint(
-            "Attack contract ether balance after donation: ",
-            address(reentranceAttack).balance
-        );
+        emit log_named_uint("Attack contract ether balance after donation: ", address(reentranceAttack).balance);
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
 
-        bool challengeCompleted = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool challengeCompleted = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(challengeCompleted);
     }
@@ -120,9 +110,7 @@ contract ReentranceTest is Test {
      * an address for that person
      */
     function makeNameForAddress(string memory name) public returns (address) {
-        address addr = address(
-            uint160(uint256(keccak256(abi.encodePacked(name))))
-        );
+        address addr = address(uint160(uint256(keccak256(abi.encodePacked(name)))));
         vm.label(addr, name);
         return addr;
     }

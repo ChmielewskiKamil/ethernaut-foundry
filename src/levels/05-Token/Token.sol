@@ -2,10 +2,10 @@
 pragma solidity ^0.6.0;
 
 contract Token {
-    mapping(address => uint) public balances;
-    uint public totalSupply;
+    mapping(address => uint256) public balances;
+    uint256 public totalSupply;
 
-    constructor(uint _initialSupply) public {
+    constructor(uint256 _initialSupply) public {
         balances[msg.sender] = totalSupply = _initialSupply;
     }
 
@@ -13,7 +13,7 @@ contract Token {
     // boolean value needs to be taken care of on the caller's end
 
     // @audit no 0 address check (address _to)
-    function transfer(address _to, uint _value) public returns (bool) {
+    function transfer(address _to, uint256 _value) public returns (bool) {
         // @audit-issue left side of the expression might underflow?
         // it means it will be greater than zero and pass the check
         require(balances[msg.sender] - _value >= 0);
@@ -28,7 +28,7 @@ contract Token {
         return true;
     }
 
-    function balanceOf(address _owner) public view returns (uint balance) {
+    function balanceOf(address _owner) public view returns (uint256 balance) {
         return balances[_owner];
     }
 }

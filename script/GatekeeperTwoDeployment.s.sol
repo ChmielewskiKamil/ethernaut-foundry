@@ -23,10 +23,8 @@ contract GatekeeperTwoDeployment is Script, Test {
         GatekeeperTwoFactory gatekeeperTwoFactory = new GatekeeperTwoFactory();
         ethernaut.registerLevel(gatekeeperTwoFactory);
 
-        address levelAddress = ethernaut.createLevelInstance(
-            gatekeeperTwoFactory
-        );
-        GatekeeperTwo gatekeeperTwoContract = GatekeeperTwo(levelAddress);
+        address levelAddress = ethernaut.createLevelInstance(gatekeeperTwoFactory);
+        // GatekeeperTwo gatekeeperTwoContract = GatekeeperTwo(levelAddress);
 
         // Level address will appear in the logs section
         // after running the script

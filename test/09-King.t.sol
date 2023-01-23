@@ -38,9 +38,7 @@ contract KingTest is Test {
         ethernaut.registerLevel(kingFactory);
         vm.startPrank(eve);
         vm.deal(eve, 2 ether);
-        address levelAddress = ethernaut.createLevelInstance{value: 1 ether}(
-            kingFactory
-        );
+        address levelAddress = ethernaut.createLevelInstance{value: 1 ether}(kingFactory);
         King kingContract = King(payable(levelAddress));
         emit log_named_address("Original king: ", kingContract._king());
 
@@ -58,9 +56,7 @@ contract KingTest is Test {
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
 
-        bool challengeCompleted = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool challengeCompleted = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(challengeCompleted);
     }
@@ -78,9 +74,7 @@ contract KingTest is Test {
      * an address for that person
      */
     function makeNameForAddress(string memory name) public returns (address) {
-        address addr = address(
-            uint160(uint256(keccak256(abi.encodePacked(name))))
-        );
+        address addr = address(uint160(uint256(keccak256(abi.encodePacked(name)))));
         vm.label(addr, name);
         return addr;
     }

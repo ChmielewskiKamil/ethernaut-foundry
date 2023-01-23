@@ -41,14 +41,8 @@ contract ForceTest is Test {
         address levelAddress = ethernaut.createLevelInstance(forceFactory);
         Force forceContract = Force(levelAddress);
 
-        emit log_named_uint(
-            "Initial Force contract's balance: ",
-            address(forceContract).balance
-        );
-        emit log_named_address(
-            "Force contract address: ",
-            address(forceContract)
-        );
+        emit log_named_uint("Initial Force contract's balance: ", address(forceContract).balance);
+        emit log_named_address("Force contract address: ", address(forceContract));
 
         // 1st step - attack contract deployment
         ForceAttack forceAttack = new ForceAttack(address(forceContract));
@@ -62,32 +56,21 @@ contract ForceTest is Test {
         // 2nd step - funding the attack contract
         emit log_string("Funding the Attack contract with 1 eth");
         vm.deal(address(forceAttack), 1 ether);
-        emit log_named_uint(
-            "The balance of the Attack contract: ",
-            address(forceAttack).balance
-        );
+        emit log_named_uint("The balance of the Attack contract: ", address(forceAttack).balance);
 
         // 3rd step - triggering selfdestruct
         emit log_string("Destroying the Attack contract...");
         forceAttack.attackForceContract();
         emit log_string("Attack contract destroyed ☠️");
-        emit log_named_address(
-            "Funds transferred to: ",
-            address(forceContract)
-        );
+        emit log_named_address("Funds transferred to: ", address(forceContract));
 
-        emit log_named_uint(
-            "The balance of the Force contract: ",
-            address(forceContract).balance
-        );
+        emit log_named_uint("The balance of the Force contract: ", address(forceContract).balance);
 
         /*//////////////////////////////////////////////////////////////
                                 LEVEL SUBMISSION
         //////////////////////////////////////////////////////////////*/
 
-        bool challengeCompleted = ethernaut.submitLevelInstance(
-            payable(levelAddress)
-        );
+        bool challengeCompleted = ethernaut.submitLevelInstance(payable(levelAddress));
         vm.stopPrank();
         assert(challengeCompleted);
     }
@@ -105,9 +88,7 @@ contract ForceTest is Test {
      * an address for that person
      */
     function makeNameForAddress(string memory name) public returns (address) {
-        address addr = address(
-            uint160(uint256(keccak256(abi.encodePacked(name))))
-        );
+        address addr = address(uint160(uint256(keccak256(abi.encodePacked(name)))));
         vm.label(addr, name);
         return addr;
     }
