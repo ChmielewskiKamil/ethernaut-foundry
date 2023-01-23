@@ -11,6 +11,9 @@ contract NaughtCoin is ERC20 {
     uint256 public INITIAL_SUPPLY;
     address public player;
 
+    // @notice Symbol name is changed from `0x0` to `NTC`
+    // due to Echidna bug
+
     constructor(address _player) ERC20("NaughtCoin", "NTC") {
         player = _player;
         INITIAL_SUPPLY = 1000000 * (10**uint256(decimals()));
