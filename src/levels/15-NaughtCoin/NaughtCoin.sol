@@ -11,7 +11,7 @@ contract NaughtCoin is ERC20 {
     uint256 public INITIAL_SUPPLY;
     address public player;
 
-    constructor(address _player) ERC20("NaughtCoin", "0x0") {
+    constructor(address _player) ERC20("NaughtCoin", "NTC") {
         player = _player;
         INITIAL_SUPPLY = 1000000 * (10**uint256(decimals()));
         // _totalSupply = INITIAL_SUPPLY;
@@ -27,6 +27,14 @@ contract NaughtCoin is ERC20 {
         returns (bool)
     {
         super.transfer(_to, _value);
+    }
+
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _amount
+    ) public override lockTokens returns (bool) {
+        super.transferFrom(_from, _to, _amount);
     }
 
     // Prevent the initial owner from transferring tokens until the timelock has passed
