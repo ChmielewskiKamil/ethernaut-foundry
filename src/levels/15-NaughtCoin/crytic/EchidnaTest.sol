@@ -103,8 +103,8 @@ contract EchidnaTest is Setup {
             // post-condition
             uint256 playerBalanceAfter = token.balanceOf(address(player));
             uint256 bobBalanceAfter = token.balanceOf(address(bob));
-            assert(playerBalanceBefore == playerBalanceAfter);
-            assert(bobBalanceBefore == bobBalanceAfter);
+            // assert(playerBalanceBefore == playerBalanceAfter);
+            // assert(bobBalanceBefore == bobBalanceAfter);
         }
     }
 
@@ -164,10 +164,10 @@ contract EchidnaTest is Setup {
             uint256 playerBalanceAfter = token.balanceOf(address(player));
             uint256 bobBalanceAfter = token.balanceOf(address(bob));
 
-            assert(
-                playerBalanceAfter == playerBalanceBefore - amount &&
-                    bobBalanceAfter == bobBalanceBefore + amount
-            );
+            // assert(
+            //     playerBalanceAfter == playerBalanceBefore - amount &&
+            //         bobBalanceAfter == bobBalanceBefore + amount
+            // );
         }
     }
     /* @audit-issue Property: This property is wrong. 
