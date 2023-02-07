@@ -34,6 +34,7 @@ contract SimpleToken {
         balances[_to] = _amount;
     }
 
+    // @audit - unprotected call to selfdestruct
     // clean up after ourselves
     function destroy(address payable _to) public {
         selfdestruct(_to);
